@@ -8,13 +8,12 @@ import android.widget.TextView
 /**
  * Created by Anastasia on 11.02.2018.
  */
-import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import com.example.anastasia.firstpractice.R
-import com.example.anastasia.firstpractice.Models.Project
+import com.example.anastasia.firstpractice.Models.Repo
 
 
-class RecyclerViewCustomAdapter(private val listData : List<Project>) :
+class RecyclerViewCustomAdapter(private val listData : List<Repo>) :
         RecyclerView.Adapter<RecyclerViewCustomAdapter.ViewHolder>(){
 
 
@@ -34,10 +33,10 @@ class RecyclerViewCustomAdapter(private val listData : List<Project>) :
     class ViewHolder(itemView: View)
         : RecyclerView.ViewHolder(itemView) {
 
-        fun bindData(userProject: Project) {
+        fun bindData(userRepo: Repo) {
 
             val projectNameTextView = itemView.findViewById<TextView>(R.id.project_name)
-            projectNameTextView.text = userProject.getProjectName()
+            projectNameTextView.text = userRepo.getProjectName()
 
         }
     }

@@ -3,7 +3,9 @@ package com.example.anastasia.firstpractice.Models
 /**
  * Created by Anastasia on 11.02.2018.
  */
-class Project {
+class Repo{
+
+    class List : ArrayList<Repo>()
 
     private var projectName : String ?= null
 
