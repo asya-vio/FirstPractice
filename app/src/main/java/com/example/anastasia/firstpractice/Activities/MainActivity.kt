@@ -20,7 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        main_recyclerview.layoutManager = LinearLayoutManager(this)
+        val recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        //main_recyclerview.layoutManager = LinearLayoutManager(this)
 
         Thread(Runnable {
 
@@ -37,33 +40,36 @@ class MainActivity : AppCompatActivity() {
 
             runOnUiThread {
                 val adapter = RecyclerViewCustomAdapter(repos)
-                main_recyclerview.adapter = adapter
+                recyclerView.adapter = adapter
+                //main_recyclerview.adapter = adapter
             }
 
             //android.util.Log.d("Repos", repos.joinToString { it.name })
         }).start()
-
-        //loadData()
     }
 
     private fun loadData() {
 
         Thread(Runnable {
             var client = OkHttpClient()
-            var request = Request.Builder()
-                    .url("https://api.github.com/users/square/repos")
+            var request = Request.Builder().url("https://api.github.com/users/square/repos")
                     .build()
 
             val response = client.newCall(request).execute()
             val responseText = response.body()!!.string()
+
             var repoList = Gson().fromJson(responseText, Repo.List::class.java)
-            updateUi(repoList)
+
+            runOnUiThread {
+                val adapter = RecyclerViewCustomAdapter(repoList)
+                //main_recyclerview.adapter = adapter
+                val recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview)
+                recyclerView.layoutManager = LinearLayoutManager(this)
+                recyclerView.adapter = adapter
+            }
+
         }).start()
 
     }
 
-    private fun updateUi(listRepo: List<Repo>) {
-        val adapter = RecyclerViewCustomAdapter(listRepo)
-        main_recyclerview.adapter = adapter
-    }
 }

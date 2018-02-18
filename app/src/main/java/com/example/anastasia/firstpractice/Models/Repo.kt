@@ -5,11 +5,11 @@ package com.example.anastasia.firstpractice.Models
  */
 data class Repo (val name : String){
 
-    private var projectName : String = name
+    //private var projectName : String = name
 
     class List : ArrayList<Repo>()
 
-    fun getProjectName () : String? { return projectName}
+    //fun getProjectName () : String? { return projectName}
 
     //fun setProjectName (name : String){projectName = name}
 }

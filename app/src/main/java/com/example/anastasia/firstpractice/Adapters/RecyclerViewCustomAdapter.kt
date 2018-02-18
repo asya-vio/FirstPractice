@@ -1,5 +1,6 @@
 package com.example.anastasia.firstpractice.Adapters
 
+import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,18 +14,22 @@ import com.example.anastasia.firstpractice.R
 import com.example.anastasia.firstpractice.Models.Repo
 
 
-class RecyclerViewCustomAdapter(private val listData : List<Repo>) :
+class RecyclerViewCustomAdapter(private val listData : ArrayList<Repo>) :
         RecyclerView.Adapter<RecyclerViewCustomAdapter.ViewHolder>(){
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewCustomAdapter.ViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view, parent, false)
+        val view : View = LayoutInflater.from(parent.context).
+                inflate(R.layout.card_view, parent, false)
+
+        val cardView = view.findViewById<CardView>(R.id.card_view)
+        cardView.radius = 5.0F
 
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerViewCustomAdapter.ViewHolder, position: Int) {
         holder.bindData(listData[position])
     }
 
@@ -36,7 +41,7 @@ class RecyclerViewCustomAdapter(private val listData : List<Repo>) :
         fun bindData(userRepo: Repo) {
 
             val projectNameTextView = itemView.findViewById<TextView>(R.id.project_name)
-            projectNameTextView.text = userRepo.getProjectName()
+            projectNameTextView.text = userRepo.name
 
         }
     }
